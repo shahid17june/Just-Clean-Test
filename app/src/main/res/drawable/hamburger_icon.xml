@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="18dp"
+    android:viewportWidth="24"
+    android:viewportHeight="18"
+    android:autoMirrored="true">
+
+    <group
+        android:name="Document"
+        android:scaleY="-1">
+        <group
+            android:name="Spread"
+            android:translateY="-18">
+            <path
+                android:fillColor="#00000000"
+                android:strokeWidth="1"
+                android:pathData="M 0.75,17.25 L 30.75,17.25 L 30.75,-6.75 L 0.75,-6.75 L 0.75,17.25 Z" />
+            <path
+                android:strokeLineJoin="bevel"
+                android:strokeMiterLimit="79.8403193612775"
+                android:pathData="M 0.001,17.999 L 0.001,0 L 23.998,0 L 23.998,17.999 L 0.001,17.999 Z" />
+            <path
+                android:fillColor="#cccccc"
+                android:strokeWidth="1.516"
+                android:strokeMiterLimit="79.8403193612775"
+                android:strokeLineCap="round"
+                android:pathData="M 0,8.69 L 0,8.561 C 0,7.976 0.476,7.5 1.061,7.5 L 22.94,7.5 C 23.525,7.5 24.001,7.976 24.001,8.561 L 24.001,8.69 C 24.001,9.275 23.525,9.751 22.94,9.751 L 1.061,9.751 C 0.476,9.751 0,9.275 0,8.69 Z" />
+            <path
+                android:fillColor="#cccccc"
+                android:strokeWidth="1.516"
+                android:strokeMiterLimit="79.8403193612775"
+                android:strokeLineCap="round"
+                android:pathData="M 0,1.19 L 0,1.061 C 0,0.476 0.476,0 1.061,0 L 16.94,0 C 17.525,0 18.001,0.476 18.001,1.061 L 18.001,1.19 C 18.001,1.775 17.525,2.251 16.94,2.251 L 1.061,2.251 C 0.476,2.251 0,1.775 0,1.19 Z" />
+            <path
+                android:fillColor="#cccccc"
+                android:strokeWidth="1.516"
+                android:strokeMiterLimit="79.8403193612775"
+                android:strokeLineCap="round"
+                android:pathData="M 0,16.94 L 0,16.811 C 0,16.226 0.476,15.75 1.061,15.75 L 12.44,15.75 C 13.025,15.75 13.501,16.226 13.501,16.811 L 13.501,16.94 C 13.501,17.525 13.025,18.001 12.44,18.001 L 1.061,18.001 C 0.476,18.001 0,17.525 0,16.94 Z" />
+        </group>
+    </group>
+</vector>

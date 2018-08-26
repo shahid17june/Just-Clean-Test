@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Just Clean Test</string>
+
+    <!--Common-->
+    <string name="OK">OK</string>
+    <string name="please_make_sure_internet_is_working">Please make sure your internet is working.</string>
+    <string name="connection_time_out">Connection time-out, please retry again.</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="alert">Alert</string>
+    <string name="error">Error</string>
+    <string name="retry">Retry</string>
+    <string name="success">Success</string>
+    <string name="please_wait">Please wait…</string>
+    <string name="security_patches_has_been_updated">You need to update app, Security patches has been updated</string>
+    <string name="ssl_handshake_exception">SSL HandShake exception.Please try again after some times</string>
+    <string name="uploading">Uploading</string>
+
+    <string name="cancel">Cancel</string>
+    <string name="done">Done</string>
+    <string name="popular_movies">Popular Movies</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="login_or_registration">Login or Registration</string>
+
+
+</resources>

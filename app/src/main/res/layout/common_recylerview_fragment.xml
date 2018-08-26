@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="?android:actionBarSize"
+    android:background="@color/white">
+
+<!--
+    <info.hoang8f.android.segmented.SegmentedGroup
+        android:id="@+id/segment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        segmentedgroup:sc_border_width="@dimen/_2sdp"
+        segmentedgroup:sc_corner_radius="@dimen/_50sdp"
+        android:visibility="gone"
+        android:layoutDirection="ltr"
+        segmentedgroup:sc_tint_color="@color/colorPrimary"
+        android:weightSum="1">
+
+        <RadioButton
+            android:id="@+id/allCars"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/all_cars"
+            style="@style/RadioButton"
+            android:checked="true"
+            android:layout_weight=".5"/>
+
+        <RadioButton
+            android:id="@+id/carsWithDriver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cars_with_drivers"
+            style="@style/RadioButton"
+            android:layout_weight=".5"/>
+    </info.hoang8f.android.segmented.SegmentedGroup>
+-->
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeToRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:overScrollMode="never">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/commonRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never" />
+
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <TextView
+        android:id="@+id/placeHolder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:visibility="gone"
+        android:gravity="center"/>
+
+    <include layout="@layout/progressbar_color_primary" />
+
+    <include layout="@layout/lazy_loading_indicator" />
+
+
+</RelativeLayout>
