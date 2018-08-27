@@ -12,7 +12,6 @@ import android.view.View
 import com.q8coders.justClean.R
 import com.q8coders.justClean.base.BaseActivity
 import com.q8coders.justClean.base.BaseFragment
-import com.q8coders.justClean.screen.common.CommonFragment
 import com.q8coders.justClean.screen.home.HomeFragment
 import com.q8coders.justClean.utility.Constants
 import com.q8coders.justClean.utility.MyUtility
