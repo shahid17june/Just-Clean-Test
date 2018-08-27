@@ -2,7 +2,6 @@ package com.q8coders.justClean.base
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,6 @@ import com.q8coders.justClean.utility.ConfirmationDialog
 import com.q8coders.justClean.utility.Constants
 import com.q8coders.justClean.utility.MyMessageDialog
 import kotlinx.android.synthetic.main.progressbar.*
-import kotlinx.android.synthetic.main.progressbar_color_primary.*
 import kotlinx.android.synthetic.main.toolbar.*
 import timber.log.Timber
 

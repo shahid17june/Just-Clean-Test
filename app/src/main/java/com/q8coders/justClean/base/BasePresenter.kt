@@ -4,10 +4,12 @@ import android.content.Context
 import android.text.TextUtils
 import com.q8coders.justClean.R
 import com.q8coders.justClean.application.MyApplication
+import com.q8coders.justClean.model.error.ErrorModel
 import com.q8coders.justClean.screen.main.MainActivity
 import retrofit2.HttpException
 import timber.log.Timber
 import java.io.IOException
+import java.net.SocketTimeoutException
 import javax.inject.Inject
 import javax.net.ssl.SSLHandshakeException
 import javax.net.ssl.SSLPeerUnverifiedException
@@ -36,13 +38,21 @@ abstract class BasePresenter<V : BaseView> {
             }
             is IOException -> {// network connection issue
                 Timber.e("Network issue")
-                MainActivity.INSTANCE!!.getLocaleString(R.string.please_make_sure_internet_is_working)
+                if(throwable is SocketTimeoutException){
+                    MainActivity.INSTANCE!!.getLocaleString(R.string.connection_time_out)
+                }else{
+                    MainActivity.INSTANCE!!.getLocaleString(R.string.please_make_sure_internet_is_working)
+                }
             }
             is HttpException -> {
                 // Api error
                 var errorMessage: String? = throwable.response().errorBody()?.string()
-                if (TextUtils.isEmpty(errorMessage)) {
-                    errorMessage = MainActivity.INSTANCE!!.getLocaleString(R.string.something_went_wrong)
+
+                errorMessage = if (TextUtils.isEmpty(errorMessage)) {
+                    MainActivity.INSTANCE!!.getLocaleString(R.string.something_went_wrong)
+                }else{
+                    val customErrorMessage = MyApplication.applicationComponent.getGsonObject().fromJson(errorMessage, ErrorModel::class.java)
+                    customErrorMessage.statusMessage
                 }
                 Timber.e("API Error=$errorMessage")
 
