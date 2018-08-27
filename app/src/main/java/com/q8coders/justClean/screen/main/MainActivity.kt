@@ -3,6 +3,7 @@ package com.q8coders.justClean.screen.main
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Menu
@@ -12,6 +13,7 @@ import com.q8coders.justClean.R
 import com.q8coders.justClean.base.BaseActivity
 import com.q8coders.justClean.base.BaseFragment
 import com.q8coders.justClean.screen.common.CommonFragment
+import com.q8coders.justClean.screen.home.HomeFragment
 import com.q8coders.justClean.utility.Constants
 import com.q8coders.justClean.utility.MyUtility
 import kotlinx.android.synthetic.main.main_activity.*
@@ -121,22 +123,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         when (item.itemId) {
             R.id.nav_popular_movies-> {
                 tag = getString(R.string.popular_movies)
-                fragment = CommonFragment()
+                fragment = HomeFragment()
                 bundle?.putString(Constants.COMING_FROM, tag)
             }
-
-            R.id.nav_top_rated -> {
-                tag = getString(R.string.top_rated)
-               fragment = CommonFragment()
-                bundle?.putString(Constants.COMING_FROM, tag)
-            }
-
-            R.id.nav_upcoming -> {
-                tag = getString(R.string.upcoming)
-                fragment = CommonFragment()
-                bundle?.putString(Constants.COMING_FROM, tag)
-            }
-
         }
 
         if (fragment != null) {
@@ -149,6 +138,18 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     fun getLocaleString(stringId : Int): String{
         return getString(stringId)
     }
+
+    fun toolbarVisibility(isTransparent: Boolean) {
+        if (isTransparent) {
+            toolbar.background = ResourcesCompat.getDrawable(resources, R.color.transparent, null)
+            appBarLayout.background =ResourcesCompat.getDrawable(resources, R.color.transparent, null)
+        } else {
+            toolbar.background = ResourcesCompat.getDrawable(resources, R.color.colorPrimary, null)
+            appBarLayout.background = ResourcesCompat.getDrawable(resources, R.color.colorPrimary, null)
+
+        }
+    }
+
 
 
 

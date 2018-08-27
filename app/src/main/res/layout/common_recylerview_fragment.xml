@@ -1,53 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mainContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="?android:actionBarSize"
     android:background="@color/white">
 
-<!--
-    <info.hoang8f.android.segmented.SegmentedGroup
-        android:id="@+id/segment"
+    <EditText
+        android:id="@+id/searchView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_5sdp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        segmentedgroup:sc_border_width="@dimen/_2sdp"
-        segmentedgroup:sc_corner_radius="@dimen/_50sdp"
+        android:layout_height="@dimen/_32sdp"
+        android:layout_margin="@dimen/_10sdp"
+        android:hint="@string/search"
         android:visibility="gone"
-        android:layoutDirection="ltr"
-        segmentedgroup:sc_tint_color="@color/colorPrimary"
-        android:weightSum="1">
-
-        <RadioButton
-            android:id="@+id/allCars"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/all_cars"
-            style="@style/RadioButton"
-            android:checked="true"
-            android:layout_weight=".5"/>
-
-        <RadioButton
-            android:id="@+id/carsWithDriver"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cars_with_drivers"
-            style="@style/RadioButton"
-            android:layout_weight=".5"/>
-    </info.hoang8f.android.segmented.SegmentedGroup>
--->
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:inputType="text"
+        android:drawableEnd="@android:drawable/ic_menu_search"
+        android:background="@drawable/edit_text_grey_border"/>
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeToRefresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5sdp"
+        android:layout_below="@+id/searchView"
         android:overScrollMode="never">
 
         <android.support.v7.widget.RecyclerView
@@ -59,7 +37,7 @@
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
-    <TextView
+    <com.q8coders.justClean.utility.MyTextView
         android:id="@+id/placeHolder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -67,9 +45,10 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:visibility="gone"
-        android:gravity="center"/>
+        android:gravity="center"
+        style="@style/mTextStyle_black_header"/>
 
-    <include layout="@layout/progressbar_color_primary" />
+    <include layout="@layout/progressbar" />
 
     <include layout="@layout/lazy_loading_indicator" />
 

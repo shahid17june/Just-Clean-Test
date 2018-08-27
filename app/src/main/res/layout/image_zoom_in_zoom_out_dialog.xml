@@ -32,6 +32,6 @@
         app:zoomage_zoomable="true" />
 
     <include
-        layout="@layout/progressbar_color_primary"/>
+        layout="@layout/progressbar"/>
 
 </LinearLayout>
