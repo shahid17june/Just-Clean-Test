@@ -13,7 +13,7 @@ import retrofit2.http.Query
 */
 interface RetrofitApi {
 
-    /*get Popular Movies*/
+    /*get Movies list*/
     @GET("movie/{param}")
     fun getMovies(@Path("param") param: String,
                   @Query("api_key") api_key: String,

@@ -40,7 +40,10 @@
 
     <!--Search -->
     <string name="search">Search</string>
-
+    <string name="popularity">Popularity:</string>
+    <string name="isadult">IsAdult:</string>
+    <string name="vote_count">Vote Count:</string>
+    <string name="vote_average">Vote Average:</string>
 
 
 </resources>

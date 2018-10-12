@@ -20,7 +20,7 @@ class MoviesService(private val callBack: ServiceCallBack) : BaseService() {
     /* Make api call to search movies listing */
     fun searchMoviesList(api_key: String, language: String, query: String, page: Int): Disposable? {
         callBack.onPrepare()
-        return subscribe(getRetrofit().searchMovies( api_key, language, query, page))
+        return subscribe(getRetrofit().searchMovies(api_key, language, query, page))
     }
 
     /* Make api call to get generies list */

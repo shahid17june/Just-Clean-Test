@@ -107,22 +107,110 @@
             android:layout_marginStart="@dimen/_30sdp"
             style="@style/mButtonStyle"/>
 
-
         <com.q8coders.justClean.utility.MyTextView
-            android:id="@+id/label"
+            android:id="@+id/populartyLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/plot_explanation"
+            android:text="@string/popularity"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_40sdp"
             android:layout_below="@+id/cardView"
             style="@style/mTextStyle_black_header" />
 
         <com.q8coders.justClean.utility.MyTextView
+            android:id="@+id/populartyValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_42sdp"
+            android:layout_below="@+id/cardView"
+            android:layout_toEndOf="@+id/populartyLabel"
+            style="@style/mTextStyle_grey_body" />
+
+        <com.q8coders.justClean.utility.MyTextView
+            android:id="@+id/isAdultLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/isadult"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_toStartOf="@+id/isAdultValue"
+            android:layout_below="@+id/cardView"
+            style="@style/mTextStyle_black_header" />
+
+        <com.q8coders.justClean.utility.MyTextView
+            android:id="@+id/isAdultValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:gravity="center_vertical"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_42sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_below="@+id/cardView"
+            android:layout_alignParentEnd="true"
+            style="@style/mTextStyle_grey_body" />
+
+
+        <com.q8coders.justClean.utility.MyTextView
+            android:id="@+id/voteLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/vote_count"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_below="@+id/populartyLabel"
+            style="@style/mTextStyle_black_header" />
+
+        <com.q8coders.justClean.utility.MyTextView
+            android:id="@+id/voteValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_below="@+id/populartyLabel"
+            android:layout_toEndOf="@+id/voteLabel"
+            style="@style/mTextStyle_grey_body" />
+
+        <com.q8coders.justClean.utility.MyTextView
+            android:id="@+id/voteAverageLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/vote_average"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_toStartOf="@+id/voteAverageValue"
+            android:layout_below="@+id/isAdultLabel"
+            style="@style/mTextStyle_black_header" />
+
+        <com.q8coders.justClean.utility.MyTextView
+            android:id="@+id/voteAverageValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_below="@+id/isAdultLabel"
+            android:layout_alignParentEnd="true"
+            style="@style/mTextStyle_grey_body" />
+
+
+        <com.q8coders.justClean.utility.MyTextView
+            android:id="@+id/plotExplanation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/plot_explanation"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_below="@+id/voteAverageLabel"
+            style="@style/mTextStyle_black_header" />
+
+        <com.q8coders.justClean.utility.MyTextView
             android:id="@+id/moviesDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/label"
+            android:layout_below="@+id/plotExplanation"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginStart="@dimen/_10sdp"
             android:text=""

@@ -70,6 +70,10 @@ class MoviesDetailFragment : BaseFragment(), MoviesDetailView {
 
         moviesDuration?.text = GenresUtil.getGenresText(moviesItem?.genreIds)
         moviesTitle?.text = moviesItem?.originalTitle
+        populartyValue?.text = moviesItem?.popularity?.toString()
+        isAdultValue?.text = moviesItem?.adult?.toString()
+        voteValue?.text = moviesItem?.voteCount?.toString()
+        voteAverageValue?.text = moviesItem?.voteAverage?.toString()
 
         if (!TextUtils.isEmpty(moviesItem?.releaseDate))
             moviesReleaseDate?.text = getString(R.string.release_date).plus(DateUtility.getDayNameAndMonthNameFormat(moviesItem?.releaseDate!!))
