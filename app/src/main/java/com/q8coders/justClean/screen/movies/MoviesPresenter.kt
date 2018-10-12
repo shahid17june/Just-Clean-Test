@@ -1,8 +1,9 @@
 package com.q8coders.justClean.screen.movies
 
-/**
- * @Created by shahid on 8/26/2018.
- */
+/*
+ * Created by Shahid Akhtar on 13/10/18.
+ * Copyright © 2018 Shahid Akhtar. All rights reserved.
+*/
 interface MoviesPresenter {
     fun init()
     fun setUpRecyclerView()

@@ -4,12 +4,12 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.q8coders.justClean"
         minSdkVersion 17
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -43,10 +43,11 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:design:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
-    implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation "com.android.support:appcompat-v7:$Android_Support_version"
+    implementation "com.android.support:design:$Android_Support_version"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation "com.android.support:cardview-v7:$Android_Support_version"
+    implementation "com.android.support:palette-v7:$Android_Support_version"
 
     //Log
     implementation 'com.jakewharton.timber:timber:4.6.0'
@@ -79,6 +80,9 @@ dependencies {
 
     // image zoom lib
     implementation 'com.jsibbold:zoomage:1.1.0'
+
+    implementation 'com.yarolegovich:discrete-scrollview:1.4.9'
+
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

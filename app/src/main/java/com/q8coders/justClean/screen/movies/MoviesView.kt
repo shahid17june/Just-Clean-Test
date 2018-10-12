@@ -2,21 +2,20 @@ package com.q8coders.justClean.screen.movies
 
 import android.support.v4.app.Fragment
 import com.q8coders.justClean.base.BaseView
+import com.q8coders.justClean.model.moviesModel.MoviesItem
 
-
-/**
- * @Created by shahid on 8/26/2018.
- */
+/*
+ * Created by Shahid Akhtar on 13/10/18.
+ * Copyright © 2018 Shahid Akhtar. All rights reserved.
+*/
 interface MoviesView : BaseView{
-    fun disableSwipeRefresh()
-    fun setMoviesAdapter(moviesAdapter : MoviesAdapter)
+    fun setMoviesAdapter(moviesAdapter : MyMoviesAdapter)
     fun showHideProgress(visibility : Int)
-    fun showHideLazyLoader(visibility: Int)
     fun errorMessage(message : String)
     fun navigation(fragment : Fragment, tag : String)
     fun setPlaceHolder(visibility: Int)
-    fun getMoviesAdapter() : MoviesAdapter
+    fun getMoviesAdapter() : MyMoviesAdapter
     fun getLocaleString(stringId : Int) : String
     fun getParam(): String
-    fun imageClicked(imageUrl: String)
+    fun onItemChanged(moviesItem: MoviesItem?)
 }

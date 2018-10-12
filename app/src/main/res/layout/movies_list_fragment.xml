@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="?android:actionBarSize"
+    android:background="@color/white">
+
+    <com.yarolegovich.discretescrollview.DiscreteScrollView
+        android:id="@+id/moviesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_270sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@color/white"/>
+
+
+    <com.q8coders.justClean.utility.MyTextView
+        android:id="@+id/moviesTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/moviesReleaseDate"
+        style="@style/mTextStyle_black_header"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:text=""/>
+
+    <com.q8coders.justClean.utility.MyTextView
+        android:id="@+id/moviesReleaseDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/moviesDuration"
+        android:layout_marginTop="@dimen/_5sdp"
+        style="@style/mTextStyle_grey_body"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:text=""/>
+
+    <com.q8coders.justClean.utility.MyTextView
+        android:id="@+id/moviesDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buy"
+        android:layout_marginTop="@dimen/_5sdp"
+        style="@style/mTextStyle_grey_body"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:text=""/>
+
+    <Button
+        android:id="@+id/buy"
+        android:layout_width="@dimen/_70ssp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="@string/buy_now"
+        android:visibility="gone"
+        android:background="@drawable/bg_round"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_25sdp"
+        style="@style/mButtonStyle"/>
+
+
+    <com.q8coders.justClean.utility.MyTextView
+        android:id="@+id/placeHolder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:visibility="gone"
+        android:gravity="center"
+        android:text="@string/no_movies_found"
+        style="@style/mTextStyle_black_header"/>
+
+    <include layout="@layout/progressbar" />
+
+
+</RelativeLayout>

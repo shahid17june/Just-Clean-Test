@@ -1,41 +1,51 @@
 package com.q8coders.justClean.screen.movies
 
 import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.OrientationHelper
-import android.support.v7.widget.PagerSnapHelper
+import android.support.v7.widget.RecyclerView
+import android.text.TextUtils
+import android.view.View
 import android.widget.TextView
 import com.q8coders.justClean.R
 import com.q8coders.justClean.application.MyApplication
 import com.q8coders.justClean.base.BaseFragment
 import com.q8coders.justClean.di.components.DaggerMoviesComponent
 import com.q8coders.justClean.di.modules.MoviesModule
+import com.q8coders.justClean.model.moviesModel.MoviesItem
 import com.q8coders.justClean.utility.Constants
+import com.q8coders.justClean.utility.DateUtility
 import com.q8coders.justClean.utility.MyUtility
-import com.q8coders.justClean.utility.ZoomInZoomOutImageDialog
-import kotlinx.android.synthetic.main.common_recylerview_fragment.*
-import kotlinx.android.synthetic.main.lazy_loading_indicator.*
+import com.yarolegovich.discretescrollview.DSVOrientation
+import com.yarolegovich.discretescrollview.DiscreteScrollView
+import com.yarolegovich.discretescrollview.transform.ScaleTransformer
+import kotlinx.android.synthetic.main.movies_list_fragment.*
 import timber.log.Timber
 import javax.inject.Inject
 
-/**
- * @Created by shahid on 8/26/2018.
- */
 
-class MoviesFragment : BaseFragment() , MoviesView{
+/*
+ * Created by Shahid Akhtar on 13/10/18.
+ * Copyright © 2018 Shahid Akhtar. All rights reserved.
+*/
+class MoviesFragment : BaseFragment(), MoviesView, DiscreteScrollView.OnItemChangedListener<RecyclerView.ViewHolder> {
 
-    private var moviesAdapter: MoviesAdapter? = null
-    private lateinit var myLayoutManager: LinearLayoutManager
-    @Inject lateinit var moviesPresenterImp : MoviesPresenterImp
+    private var moviesAdapter: MyMoviesAdapter? = null
+    @Inject lateinit var moviesPresenterImp: MoviesPresenterImp
 
-    override fun setLayoutResource(): Int = R.layout.common_recylerview_fragment
-
+    override fun setLayoutResource(): Int = R.layout.movies_list_fragment
 
     override fun viewIsReady() {
-       Timber.d("Tab is==============================================: $text")
-        placeHolder?.text = getString(R.string.no_movies_found)
-        myLayoutManager = LinearLayoutManager(activity, OrientationHelper.HORIZONTAL, false)
-        commonRecyclerView?.layoutManager = myLayoutManager
+        Timber.d("Tab is==============================================: $text")
+
+        moviesRecyclerView?.setOrientation(DSVOrientation.HORIZONTAL)
+        moviesRecyclerView?.addOnItemChangedListener(this)
+
+        moviesAdapter = MyMoviesAdapter(false)
+        moviesRecyclerView?.adapter = moviesAdapter
+
+        moviesRecyclerView?.setItemTransitionTimeMillis(150)
+        moviesRecyclerView?.setItemTransformer(ScaleTransformer.Builder()
+                .setMinScale(0.8f)
+                .build())
 
         moviesPresenterImp.init()
         moviesPresenterImp.setUpRecyclerView()
@@ -43,14 +53,14 @@ class MoviesFragment : BaseFragment() , MoviesView{
     }
 
     override fun setFragmentTitle(actionBarTitle: TextView?, text: String?) {
-       actionBarTitle?.text = Constants.EMPTY
+        actionBarTitle?.text = Constants.EMPTY
     }
 
     override fun resolveDependency() {
-       DaggerMoviesComponent.builder()
-               .applicationComponent(MyApplication.applicationComponent)
-               .moviesModule(MoviesModule(this))
-               .build().injectView(this)
+        DaggerMoviesComponent.builder()
+                .applicationComponent(MyApplication.applicationComponent)
+                .moviesModule(MoviesModule(this))
+                .build().injectView(this)
     }
 
     override fun retry() {
@@ -58,36 +68,18 @@ class MoviesFragment : BaseFragment() , MoviesView{
         moviesPresenterImp.makeServiceCall()
     }
 
-    override fun setMoviesAdapter(moviesAdapter: MoviesAdapter) {
-        commonRecyclerView?.adapter = moviesAdapter
+    override fun setMoviesAdapter(moviesAdapter: MyMoviesAdapter) {
+        moviesRecyclerView?.adapter = moviesAdapter
     }
 
-    override fun getMoviesAdapter(): MoviesAdapter {
-        if (moviesAdapter == null){
-            moviesAdapter = MoviesAdapter(false, commonRecyclerView, myLayoutManager)
-
-            /*PageSnap Helper class will be helped to scroll recycler view as a viewpager*/
-            val snapHelper = PagerSnapHelper()
-            snapHelper.attachToRecyclerView(commonRecyclerView)
-
-        }
-
-
+    override fun getMoviesAdapter(): MyMoviesAdapter {
         return moviesAdapter!!
-    }
-
-    override fun disableSwipeRefresh() {
-        swipeToRefresh?.isRefreshing = false
-        swipeToRefresh?.isEnabled = false
     }
 
     override fun showHideProgress(visibility: Int) {
         super.showHideLoader(visibility)
     }
 
-    override fun showHideLazyLoader(visibility: Int) {
-        lazy_indicator?.visibility = visibility
-    }
 
     override fun errorMessage(message: String) {
         showErrorMessageDialog(getString(R.string.error), message, true)
@@ -112,12 +104,27 @@ class MoviesFragment : BaseFragment() , MoviesView{
 
     }
 
-    override fun imageClicked(imageUrl: String) {
-        ZoomInZoomOutImageDialog(activity!!, imageUrl)
+
+    override fun onCurrentItemChanged(viewHolder: RecyclerView.ViewHolder?, adapterPosition: Int) {
+        onItemChanged(moviesAdapter?.getItem(adapterPosition))
     }
 
+    override fun onItemChanged(moviesItem: MoviesItem?) {
+        if(moviesItem!= null){
 
+            moviesDuration?.text = GenresUtil.getGenresText(moviesItem.genreIds)
 
+            buy.visibility = View.VISIBLE
+            moviesTitle?.text = moviesItem.originalTitle
+
+            if(!TextUtils.isEmpty(moviesItem.releaseDate))
+                moviesReleaseDate?.text = getString(R.string.release_date).plus(DateUtility.getDayNameAndMonthNameFormat(moviesItem.releaseDate!!))
+
+        }else{
+            buy.visibility = View.GONE
+        }
+
+    }
 
 
 }

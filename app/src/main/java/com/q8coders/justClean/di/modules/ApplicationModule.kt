@@ -18,9 +18,10 @@ import okhttp3.CertificatePinner
 
 
 
-/**
- * @Created by shahid on 8/26/2018.
- */
+/*
+ * Created by Shahid Akhtar on 13/10/18.
+ * Copyright © 2018 Shahid Akhtar. All rights reserved.
+*/
 @Module
 class ApplicationModule(val mContext: MyApplication) {
 

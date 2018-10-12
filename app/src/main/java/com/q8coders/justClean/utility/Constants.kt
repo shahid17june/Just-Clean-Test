@@ -1,8 +1,9 @@
 package com.q8coders.justClean.utility
 
-/**
- * @Created by shahid on 6/30/2018.
- */
+/*
+ * Created by Shahid Akhtar on 13/10/18.
+ * Copyright © 2018 Shahid Akhtar. All rights reserved.
+*/
 class Constants {
     companion object {
         /*Network Call*/
@@ -21,7 +22,6 @@ class Constants {
         /**/
         const val COMING_FROM = "COMING_FROM"
         const val ITEM_CLICKED = "ITEM_CLICKED"
-        const val IMAGE_CLICKED = "IMAGE_CLICKED"
         const val OBJECT = "OBJECT"
 
     }

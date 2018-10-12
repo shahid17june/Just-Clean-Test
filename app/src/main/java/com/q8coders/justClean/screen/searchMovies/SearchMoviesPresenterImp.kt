@@ -8,21 +8,22 @@ import com.q8coders.justClean.R
 import com.q8coders.justClean.base.BasePresenter
 import com.q8coders.justClean.base.ServiceCallBack
 import com.q8coders.justClean.model.moviesModel.MoviesJsonModel
-import com.q8coders.justClean.screen.movies.MoviesAdapter
 import com.q8coders.justClean.screen.movies.MoviesService
+import com.q8coders.justClean.screen.movies.MyMoviesAdapter
 import com.q8coders.justClean.screen.moviesDetail.MoviesDetailFragment
 import com.q8coders.justClean.utility.Constants
 import com.q8coders.justClean.utility.RecyclerClickListner
 import javax.inject.Inject
 
-/**
- * @Created by shahid on 8/27/2018.
- */
+/*
+ * Created by Shahid Akhtar on 13/10/18.
+ * Copyright © 2018 Shahid Akhtar. All rights reserved.
+*/
 class SearchMoviesPresenterImp @Inject constructor(): BasePresenter<SearchMoviesView>(), SearchMoviesPresenter ,ServiceCallBack, RecyclerClickListner{
 
     private var moviesService: MoviesService? = null
     private var page = 1
-    private lateinit var moviesAdapter: MoviesAdapter
+    private lateinit var moviesAdapter: MyMoviesAdapter
 
     override fun init() {
         moviesService = MoviesService(this)
@@ -32,8 +33,6 @@ class SearchMoviesPresenterImp @Inject constructor(): BasePresenter<SearchMovies
         moviesAdapter = mView.getHMoviesAdapter()
         moviesAdapter.setOnClickListner(this)
         mView.setMoviesAdapter(moviesAdapter)
-        mView.disableSwipeRefresh()
-
     }
 
     override fun makeServiceCall(text : String?) {
@@ -54,7 +53,6 @@ class SearchMoviesPresenterImp @Inject constructor(): BasePresenter<SearchMovies
         if (response is MoviesJsonModel) {
             moviesAdapter.clearAllData()
             moviesAdapter.addDataAsBulkList(response.results!!)
-
         }
 
         if (moviesAdapter.itemCount == 0) {
@@ -72,9 +70,6 @@ class SearchMoviesPresenterImp @Inject constructor(): BasePresenter<SearchMovies
 
     }
 
-    override fun resetValueForRetry() {
-        page = 1
-    }
 
     override fun itemClicked(position: Int, taskIdentifier: String?) {
         when(taskIdentifier){
@@ -86,19 +81,7 @@ class SearchMoviesPresenterImp @Inject constructor(): BasePresenter<SearchMovies
                 mFragment.arguments = bundle
                 mView.navigation(mFragment, tag)
             }
-            else->{
-                mView.imageClicked(taskIdentifier!!)
-            }
         }
     }
 
-    override fun redirectToSearchMovies(){
-        val tag = mView.getLocaleString(R.string.search)
-        val mFragment = SearchMoviesFragment()
-        val bundle = Bundle()
-        bundle.putString(Constants.OBJECT, tag)
-        mFragment.arguments = bundle
-        mView.navigation(mFragment, tag)
-
-    }
 }

@@ -28,8 +28,9 @@
     <string name="upcoming">Upcoming</string>
     <string name="movies_image">Movies Image</string>
     <string name="no_movies_found">No Movies found.</string>
-    <string name="buy">Buy</string>
+    <string name="buy_now">Buy Now</string>
     <string name="release_date">Release date:</string>
+    <string name="film">Film</string>
 
     <!-- Movies Detail -->
     <string name="play_icon">Play Icon</string>
@@ -39,6 +40,7 @@
 
     <!--Search -->
     <string name="search">Search</string>
+
 
 
 </resources>

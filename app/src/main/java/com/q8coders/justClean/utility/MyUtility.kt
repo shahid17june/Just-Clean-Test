@@ -8,9 +8,10 @@ import android.view.inputmethod.InputMethodManager
 import com.q8coders.justClean.R
 
 
-/**
- * @Created by shahid on 8/26/2018.
- */
+/*
+ * Created by Shahid Akhtar on 13/10/18.
+ * Copyright © 2018 Shahid Akhtar. All rights reserved.
+*/
 class MyUtility {
 
     companion object {

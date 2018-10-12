@@ -9,11 +9,13 @@ import com.q8coders.justClean.di.modules.ApplicationModule
 import timber.log.Timber
 import com.q8coders.justClean.base.NotLoggingTree
 import android.support.v7.app.AppCompatDelegate
+import com.q8coders.justClean.model.generes.GeneresJsonModel
 
 
-/**
- * @Created by shahid on 8/26/2018.
- */
+/*
+ * Created by Shahid Akhtar on 13/10/18.
+ * Copyright © 2018 Shahid Akhtar. All rights reserved.
+*/
 class MyApplication : Application() {
 
     init {
@@ -42,6 +44,7 @@ class MyApplication : Application() {
 
     companion object {
         lateinit var applicationComponent: ApplicationComponent
+        var generesJsonModel : GeneresJsonModel?= null
 
     }
 

@@ -1,16 +1,16 @@
 package com.q8coders.justClean.screen.home
 
 import android.os.Bundle
-import com.q8coders.justClean.R
 import com.q8coders.justClean.base.BasePresenter
 import com.q8coders.justClean.screen.searchMovies.SearchMoviesFragment
 import com.q8coders.justClean.utility.Constants
 import javax.inject.Inject
 
 
-/**
- * @Created by shahid on 8/26/2018.
- */
+/*
+ * Created by Shahid Akhtar on 13/10/18.
+ * Copyright © 2018 Shahid Akhtar. All rights reserved.
+*/
 class HomePresenterImp @Inject constructor(): BasePresenter<HomeView>(), HomePresenter {
 
     override fun redirectToSearchMovies(tag : String){

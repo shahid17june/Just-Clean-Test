@@ -25,7 +25,7 @@ data class MoviesItem(
 	val title: String? = null,
 
 	@field:SerializedName("genre_ids")
-	val genreIds: List<Int?>? = null,
+	val genreIds: MutableList<Int>? = null,
 
 	@field:SerializedName("poster_path")
 	val posterPath: String? = null,

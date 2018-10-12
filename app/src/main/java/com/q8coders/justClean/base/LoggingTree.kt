@@ -2,9 +2,10 @@ package com.q8coders.justClean.base
 
 import timber.log.Timber
 
-/**
- * @Created by shahid on 8/26/2018.
- */
+/*
+ * Created by Shahid Akhtar on 13/10/18.
+ * Copyright © 2018 Shahid Akhtar. All rights reserved.
+*/
 class LoggingTree : Timber.DebugTree() {
 
     /*return log information in more detail when its in debug mode*/

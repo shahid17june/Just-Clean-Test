@@ -8,21 +8,19 @@ import com.q8coders.justClean.base.BasePresenter
 import com.q8coders.justClean.base.ServiceCallBack
 import com.q8coders.justClean.model.moviesModel.MoviesJsonModel
 import com.q8coders.justClean.screen.moviesDetail.MoviesDetailFragment
-import com.q8coders.justClean.screen.searchMovies.SearchMoviesFragment
 import com.q8coders.justClean.utility.Constants
 import com.q8coders.justClean.utility.RecyclerClickListner
 import javax.inject.Inject
 
-
-/**
- * @Created by shahid on 8/26/2018.
- */
+/*
+ * Created by Shahid Akhtar on 13/10/18.
+ * Copyright © 2018 Shahid Akhtar. All rights reserved.
+*/
 class MoviesPresenterImp @Inject constructor() : BasePresenter<MoviesView>(), MoviesPresenter, ServiceCallBack, RecyclerClickListner {
-
 
     private var moviesService: MoviesService? = null
     private var page = 0
-    private lateinit var moviesAdapter: MoviesAdapter
+    private lateinit var moviesAdapter: MyMoviesAdapter
 
     override fun init() {
         moviesService = MoviesService(this)
@@ -32,7 +30,6 @@ class MoviesPresenterImp @Inject constructor() : BasePresenter<MoviesView>(), Mo
         moviesAdapter = mView.getMoviesAdapter()
         moviesAdapter.setOnClickListner(this)
         mView.setMoviesAdapter(moviesAdapter)
-        mView.disableSwipeRefresh()
 
         makeServiceCall()
     }
@@ -47,7 +44,6 @@ class MoviesPresenterImp @Inject constructor() : BasePresenter<MoviesView>(), Mo
 
     override fun <T> onSuccess(response: T) {
         mView.showHideProgress(View.GONE)
-
         if (response is MoviesJsonModel) {
             moviesAdapter.addDataAsBulkList(response.results!!)
 
@@ -55,7 +51,9 @@ class MoviesPresenterImp @Inject constructor() : BasePresenter<MoviesView>(), Mo
 
         if (moviesAdapter.itemCount == 0) {
             mView.setPlaceHolder(View.VISIBLE)
+            mView.onItemChanged(null)
         } else {
+            mView.onItemChanged(moviesAdapter.getItem(0))
             mView.setPlaceHolder(View.GONE)
         }
 
@@ -75,18 +73,16 @@ class MoviesPresenterImp @Inject constructor() : BasePresenter<MoviesView>(), Mo
     override fun itemClicked(position: Int, taskIdentifier: String?) {
         when(taskIdentifier){
             Constants.ITEM_CLICKED->{
-                val tag = mView.getLocaleString(R.string.OK)
+                val tag = mView.getLocaleString(R.string.app_name)
                 val mFragment = MoviesDetailFragment()
                 val bundle = Bundle()
                 bundle.putParcelable(Constants.OBJECT, moviesAdapter.getItem(position))
                 mFragment.arguments = bundle
                 mView.navigation(mFragment, tag)
             }
-            else->{
-                mView.imageClicked(taskIdentifier!!)
-            }
         }
     }
+
 
 
 

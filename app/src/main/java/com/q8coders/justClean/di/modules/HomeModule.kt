@@ -7,9 +7,10 @@ import com.q8coders.justClean.screen.home.HomeView
 import dagger.Module
 import dagger.Provides
 
-/**
- * @Created by shahid on 8/26/2018.
- */
+/*
+ * Created by Shahid Akhtar on 13/10/18.
+ * Copyright © 2018 Shahid Akhtar. All rights reserved.
+*/
 
 @Module
 class HomeModule constructor(val mView: HomeView) {

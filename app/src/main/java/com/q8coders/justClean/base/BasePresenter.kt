@@ -6,21 +6,33 @@ import com.q8coders.justClean.R
 import com.q8coders.justClean.application.MyApplication
 import com.q8coders.justClean.model.error.ErrorModel
 import com.q8coders.justClean.screen.main.MainActivity
+import io.reactivex.disposables.Disposable
 import retrofit2.HttpException
 import timber.log.Timber
 import java.io.IOException
 import java.net.SocketTimeoutException
+import java.util.*
 import javax.inject.Inject
 import javax.net.ssl.SSLHandshakeException
 import javax.net.ssl.SSLPeerUnverifiedException
 
 
-/**
- * @Created by shahid on 8/26/2018.
+/*
+ * Created by Shahid Akhtar on 13/10/18.
+ * Copyright © 2018 Shahid Akhtar. All rights reserved.
 */
 abstract class BasePresenter<V : BaseView> {
 
     @Inject lateinit var mView: V
+    private var disposableList: MutableList<Disposable?>?= LinkedList()
+
+    fun disposeApiCall(){
+        disposableList?.forEach { it?.dispose() }
+    }
+
+    protected fun addDisposable(disposable: Disposable?){
+        disposableList?.add(disposable)
+    }
 
     protected fun getAppContext(): Context = MyApplication.applicationComponent.getContext()
 

@@ -6,9 +6,10 @@ import com.q8coders.justClean.screen.searchMovies.SearchMoviesFragment
 import dagger.Component
 
 
-/**
- * @Created by shahid on 8/27/2018.
- */
+/*
+ * Created by Shahid Akhtar on 13/10/18.
+ * Copyright © 2018 Shahid Akhtar. All rights reserved.
+*/
 @PerFragment
 @Component(modules = [(SearchMoviesModule::class)], dependencies = [(ApplicationComponent::class)])
 interface SearchMoviesComponent {

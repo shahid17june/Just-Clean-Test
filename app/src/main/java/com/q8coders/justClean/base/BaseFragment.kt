@@ -11,19 +11,22 @@ import com.q8coders.justClean.R
 import com.q8coders.justClean.utility.ConfirmationDialog
 import com.q8coders.justClean.utility.Constants
 import com.q8coders.justClean.utility.MyMessageDialog
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.progressbar.*
 import kotlinx.android.synthetic.main.toolbar.*
 import timber.log.Timber
 
-/**
- * @Created by shahid on 8/26/2018.
- */
+/*
+ * Created by Shahid Akhtar on 13/10/18.
+ * Copyright © 2018 Shahid Akhtar. All rights reserved.
+*/
 abstract class BaseFragment : Fragment(), BaseView {
     private var mView: View? = null
     private var isFragmentExists: Boolean = false
     private var tootBarTitle: TextView? = null
     protected var text: String? = Constants.EMPTY
     private var isViewDestroy: Boolean = false
+    protected val compositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,6 +98,7 @@ abstract class BaseFragment : Fragment(), BaseView {
 
     override fun onDestroyView() {
         isViewDestroy = true
+        compositeDisposable.clear()
         super.onDestroyView()
         if (mView != null && mView?.parent != null) {
             try{

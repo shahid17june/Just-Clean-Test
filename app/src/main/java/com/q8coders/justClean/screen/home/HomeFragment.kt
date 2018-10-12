@@ -15,9 +15,10 @@ import com.q8coders.justClean.utility.MyUtility
 import kotlinx.android.synthetic.main.home_fragment.*
 import javax.inject.Inject
 
-/**
- * @Created by shahid on 8/26/2018.
- */
+/*
+ * Created by Shahid Akhtar on 13/10/18.
+ * Copyright © 2018 Shahid Akhtar. All rights reserved.
+*/
 class HomeFragment : BaseFragment(), HomeView {
 
     @Inject
@@ -48,7 +49,7 @@ class HomeFragment : BaseFragment(), HomeView {
     }
 
     private fun addTabs() {
-        tabLayout?.addTab(tabLayout.newTab().setText(getString(R.string.popular_movies)))
+                tabLayout?.addTab(tabLayout.newTab().setText(getString(R.string.popular_movies)))
         tabLayout?.addTab(tabLayout.newTab().setText(getString(R.string.top_rated)))
         tabLayout?.addTab(tabLayout.newTab().setText(getString(R.string.upcoming)))
         tabLayout?.tabGravity = TabLayout.GRAVITY_FILL

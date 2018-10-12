@@ -1,6 +1,5 @@
 package com.q8coders.justClean.screen.main
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.content.res.ResourcesCompat
@@ -9,27 +8,34 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import com.q8coders.justClean.BuildConfig
 import com.q8coders.justClean.R
+import com.q8coders.justClean.application.MyApplication
 import com.q8coders.justClean.base.BaseActivity
 import com.q8coders.justClean.base.BaseFragment
+import com.q8coders.justClean.base.ServiceCallBack
+import com.q8coders.justClean.model.generes.GeneresJsonModel
 import com.q8coders.justClean.screen.home.HomeFragment
+import com.q8coders.justClean.screen.movies.MoviesService
 import com.q8coders.justClean.utility.Constants
 import com.q8coders.justClean.utility.MyUtility
 import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.toolbar.*
 
+/*
+ * Created by Shahid Akhtar on 13/10/18.
+ * Copyright © 2018 Shahid Akhtar. All rights reserved.
+*/
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener, ServiceCallBack {
 
-/**
- * @Created by shahid on 8/26/2018.
- */
-class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private var menu: Menu? = null
     private var v: View? = null
     private var bundle: Bundle? = null
+    private val moviesService: MoviesService = MoviesService(this)
 
     companion object {
-        var INSTANCE : MainActivity? = null
+        var INSTANCE: MainActivity? = null
     }
 
     override fun setLayoutResources(): Int = R.layout.main_activity
@@ -38,15 +44,16 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         setToolBar()
         INSTANCE = this
 
+        if (MyApplication.generesJsonModel == null) {
+            moviesService.getGenresList(BuildConfig.ACCESS_KEY, Constants.LANGUAGE)
+        }
+
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.isDrawerIndicatorEnabled = false
         toggle.setHomeAsUpIndicator(R.drawable.hamburger_icon)
         toggle.syncState()
-
-        nav_view.setNavigationItemSelectedListener(this)
-
 
         //Make click on first navigation option
         val navigationView = nav_view as NavigationView
@@ -70,7 +77,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
 
         supportFragmentManager.addOnBackStackChangedListener {
-            // val fragment = supportFragmentManager.findFragmentById(R.id.content)
             if (supportFragmentManager.backStackEntryCount > 0) {
 
                 toggle.isDrawerIndicatorEnabled = false
@@ -120,7 +126,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         var tag: String? = null
 
         when (item.itemId) {
-            R.id.nav_popular_movies-> {
+            R.id.nav_popular_movies -> {
                 tag = getString(R.string.popular_movies)
                 fragment = HomeFragment()
                 bundle?.putString(Constants.COMING_FROM, tag)
@@ -134,24 +140,31 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         return true
     }
 
-    fun getLocaleString(stringId : Int): String{
+    fun getLocaleString(stringId: Int): String {
         return getString(stringId)
     }
 
     fun toolbarVisibility(isTransparent: Boolean) {
         if (isTransparent) {
             toolbar.background = ResourcesCompat.getDrawable(resources, R.color.transparent, null)
-            appBarLayout.background =ResourcesCompat.getDrawable(resources, R.color.transparent, null)
         } else {
             toolbar.background = ResourcesCompat.getDrawable(resources, R.color.colorPrimary, null)
-            appBarLayout.background = ResourcesCompat.getDrawable(resources, R.color.colorPrimary, null)
-
         }
     }
 
+    override fun onPrepare() {
 
+    }
 
+    override fun <T> onSuccess(response: T) {
+        if (response is GeneresJsonModel) {
+            MyApplication.generesJsonModel = response
+        }
+    }
 
+    override fun onError(throwable: Throwable) {
+
+    }
 
 
 }

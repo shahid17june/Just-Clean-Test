@@ -4,14 +4,24 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
+import timber.log.Timber
 import java.util.*
 
-/**
- * @Created by shahid on 8/26/2018.
- */
+/*
+ * Created by Shahid Akhtar on 13/10/18.
+ * Copyright © 2018 Shahid Akhtar. All rights reserved.
+*/
+
 abstract class BaseAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     protected var items: LinkedList<T> = LinkedList()
+    protected var compositeDisposable = CompositeDisposable()
+
+    protected fun addDisposable(disposable: Disposable?){
+        compositeDisposable.add(disposable)
+    }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         onBindViewHold(holder, position)
@@ -42,6 +52,12 @@ abstract class BaseAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     protected fun removeData(position: Int){
         items.removeAt(position)
         notifyItemRemoved(position)
+    }
+
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        compositeDisposable.clear()
+        Timber.d("Deatached from recycler.........................${compositeDisposable.size()}")
+        super.onDetachedFromRecyclerView(recyclerView)
     }
 
     abstract fun setItemLayout(): Int

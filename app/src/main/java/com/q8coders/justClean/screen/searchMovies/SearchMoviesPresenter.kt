@@ -1,12 +1,11 @@
 package com.q8coders.justClean.screen.searchMovies
 
-/**
- * @Created by shahid on 8/27/2018.
- */
+/*
+ * Created by Shahid Akhtar on 13/10/18.
+ * Copyright © 2018 Shahid Akhtar. All rights reserved.
+*/
 interface SearchMoviesPresenter {
     fun init()
     fun setUpRecyclerView()
     fun makeServiceCall(text : String?)
-    fun resetValueForRetry()
-    fun redirectToSearchMovies()
 }

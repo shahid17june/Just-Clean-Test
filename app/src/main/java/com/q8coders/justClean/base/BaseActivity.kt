@@ -7,10 +7,12 @@ import com.q8coders.justClean.utility.MyMessageDialog
 import kotlinx.android.synthetic.main.toolbar.*
 
 
-/**
- * @Created by shahid on 8/26/2018.
- */
-abstract class BaseActivity : AppCompatActivity(){
+/*
+ * Created by Shahid Akhtar on 13/10/18.
+ * Copyright © 2018 Shahid Akhtar. All rights reserved.
+*/
+
+abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,12 +22,12 @@ abstract class BaseActivity : AppCompatActivity(){
         onViewCreated()
     }
 
-    protected fun setToolBar(){
+    protected fun setToolBar() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
-    protected fun showDialogBox(message : Int){
+    protected fun showDialogBox(message: Int) {
         object : MyMessageDialog(this, getString(R.string.error), getString(message)) {
             override fun dialogPositiveClicked() {
                 onBackPressed()
@@ -34,7 +36,7 @@ abstract class BaseActivity : AppCompatActivity(){
     }
 
 
-    abstract fun setLayoutResources() : Int
+    abstract fun setLayoutResources(): Int
     abstract fun onViewCreated()
     abstract fun resolveDependencyInjection()
 

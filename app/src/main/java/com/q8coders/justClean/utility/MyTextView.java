@@ -5,7 +5,10 @@ import android.graphics.Typeface;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 
-
+/*
+ * Created by Shahid Akhtar on 13/10/18.
+ * Copyright © 2018 Shahid Akhtar. All rights reserved.
+ */
 public class MyTextView extends AppCompatTextView {
 
     Typeface normalTypeface = Typeface.createFromAsset(getContext().getAssets(), "Dubai-Bold.ttf");

@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".screen.main.MainActivity">
 
-    <include layout="@layout/toolbar"/>
-
     <include layout="@layout/content_main" />
+
+    <include layout="@layout/toolbar"/>
 
 </RelativeLayout>

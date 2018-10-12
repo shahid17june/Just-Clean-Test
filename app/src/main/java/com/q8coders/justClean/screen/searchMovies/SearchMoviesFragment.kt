@@ -2,7 +2,6 @@ package com.q8coders.justClean.screen.searchMovies
 
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.view.View
 import android.widget.TextView
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.q8coders.justClean.R
@@ -10,51 +9,51 @@ import com.q8coders.justClean.application.MyApplication
 import com.q8coders.justClean.base.BaseFragment
 import com.q8coders.justClean.di.components.DaggerSearchMoviesComponent
 import com.q8coders.justClean.di.modules.SearchMoviesModule
-import com.q8coders.justClean.screen.movies.MoviesAdapter
-import com.q8coders.justClean.utility.Constants
+import com.q8coders.justClean.screen.movies.MyMoviesAdapter
 import com.q8coders.justClean.utility.MyUtility
-import com.q8coders.justClean.utility.ZoomInZoomOutImageDialog
 import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.common_recylerview_fragment.*
-import kotlinx.android.synthetic.main.lazy_loading_indicator.*
+import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.search_movies_fragment.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-/**
- * @Created by shahid on 8/27/2018.
- */
+/*
+ * Created by Shahid Akhtar on 13/10/18.
+ * Copyright © 2018 Shahid Akhtar. All rights reserved.
+*/
 class SearchMoviesFragment : BaseFragment(), SearchMoviesView {
 
-    private var moviesAdapter: MoviesAdapter? = null
-
-    private lateinit var myLayoutManager: LinearLayoutManager
-
+    private var moviesAdapter: MyMoviesAdapter? = null
     @Inject lateinit var searchMoviesPresenterImp: SearchMoviesPresenterImp
 
-    override fun setLayoutResource(): Int = R.layout.common_recylerview_fragment
-
+    override fun setLayoutResource(): Int = R.layout.search_movies_fragment
 
     override fun viewIsReady() {
-        searchView?.visibility = View.VISIBLE
-        placeHolder?.text = getString(R.string.no_movies_found)
-        myLayoutManager = LinearLayoutManager(activity)
-        commonRecyclerView?.layoutManager = myLayoutManager
+        moviesRecyclerView?.layoutManager = LinearLayoutManager(activity)
+        moviesAdapter = MyMoviesAdapter(true)
 
         searchMoviesPresenterImp.init()
         searchMoviesPresenterImp.setUpRecyclerView()
-
-        /* Analyze the text changes on edit box and make api call */
-        RxTextView.textChanges(searchView)
-                .skip(1)
-                .debounce(350, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .map { text -> searchMoviesPresenterImp.makeServiceCall(text = text.toString()) }
-                .subscribe()
-
     }
 
     override fun setFragmentTitle(actionBarTitle: TextView?, text: String?) {
         actionBarTitle?.text = text
+
+        compositeDisposable.add(
+                /* Analyze the text changes on edit box and after that make api call */
+                RxTextView.textChanges(searchView)
+                        .skip(1)
+                        .subscribeOn(Schedulers.io())
+                        .debounce(700, TimeUnit.MILLISECONDS)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .map { myText -> searchMoviesPresenterImp.makeServiceCall(text = myText.toString()) }
+                        .subscribe()
+        )
+    }
+
+    override fun onPause() {
+        super.onPause()
+        searchMoviesPresenterImp.disposeApiCall()
     }
 
     override fun resolveDependency() {
@@ -65,34 +64,22 @@ class SearchMoviesFragment : BaseFragment(), SearchMoviesView {
     }
 
     override fun retry() {
-        searchMoviesPresenterImp.resetValueForRetry()
         searchMoviesPresenterImp.makeServiceCall(searchView?.text?.toString())
     }
 
-    override fun setMoviesAdapter(moviesAdapter: MoviesAdapter) {
-        commonRecyclerView?.adapter = moviesAdapter
+    override fun setMoviesAdapter(moviesAdapter: MyMoviesAdapter) {
+        moviesRecyclerView?.adapter = moviesAdapter
     }
 
-    override fun getHMoviesAdapter(): MoviesAdapter {
-        if (moviesAdapter == null){
-            moviesAdapter = MoviesAdapter(true, commonRecyclerView, myLayoutManager)
-
-        }
+    override fun getHMoviesAdapter(): MyMoviesAdapter {
         return moviesAdapter!!
     }
 
-    override fun disableSwipeRefresh() {
-        swipeToRefresh?.isRefreshing = false
-        swipeToRefresh?.isEnabled = false
-    }
 
     override fun showHideProgress(visibility: Int) {
         super.showHideLoader(visibility)
     }
 
-    override fun showHideLazyLoader(visibility: Int) {
-        lazy_indicator?.visibility = visibility
-    }
 
     override fun errorMessage(message: String) {
         showErrorMessageDialog(getString(R.string.error), message, true)
@@ -108,18 +95,6 @@ class SearchMoviesFragment : BaseFragment(), SearchMoviesView {
 
     override fun getLocaleString(stringId: Int): String = getString(stringId)
 
-    override fun getParam(): String {
-        return when (text) {
-            getString(R.string.popular_movies) -> Constants.POPULAR
-            getString(R.string.top_rated) -> Constants.TOP_RATED
-            else -> Constants.UP_COMING
-        }
-
-    }
-
-    override fun imageClicked(imageUrl: String) {
-        ZoomInZoomOutImageDialog(activity!!, imageUrl)
-    }
 
     override fun hideKeyBoard(){
         MyUtility.hideSoftKeyBoard(activity)

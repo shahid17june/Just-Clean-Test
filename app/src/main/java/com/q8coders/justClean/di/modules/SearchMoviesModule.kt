@@ -7,10 +7,10 @@ import com.q8coders.justClean.screen.searchMovies.SearchMoviesView
 import dagger.Module
 import dagger.Provides
 
-/**
- * @Created by shahid on 8/27/2018.
- */
-
+/*
+ * Created by Shahid Akhtar on 13/10/18.
+ * Copyright © 2018 Shahid Akhtar. All rights reserved.
+*/
 @Module
 class SearchMoviesModule constructor(val mView: SearchMoviesView) {
 

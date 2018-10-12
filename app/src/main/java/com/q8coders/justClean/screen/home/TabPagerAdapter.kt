@@ -7,9 +7,10 @@ import android.support.v4.app.FragmentStatePagerAdapter
 import com.q8coders.justClean.screen.movies.MoviesFragment
 import com.q8coders.justClean.utility.Constants
 
-/**
- * @Created by shahid on 8/26/2018.
- */
+/*
+ * Created by Shahid Akhtar on 13/10/18.
+ * Copyright © 2018 Shahid Akhtar. All rights reserved.
+*/
 class TabPagerAdapter(fm: FragmentManager, private val numOfTabs: Int, private val title : Array<String>) : FragmentStatePagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="?android:actionBarSize">
+
+    <EditText
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_32sdp"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@drawable/edit_text_grey_border"
+        android:drawableEnd="@android:drawable/ic_menu_search"
+        android:hint="@string/search"
+        android:inputType="text"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        tools:ignore="Autofill" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/moviesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchView"
+        android:overScrollMode="never" />
+
+    <com.q8coders.justClean.utility.MyTextView
+        android:id="@+id/placeHolder"
+        style="@style/mTextStyle_black_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:gravity="center"
+        android:text="@string/no_movies_found"
+        android:visibility="gone" />
+
+    <include layout="@layout/progressbar" />
+
+
+
+</RelativeLayout>
