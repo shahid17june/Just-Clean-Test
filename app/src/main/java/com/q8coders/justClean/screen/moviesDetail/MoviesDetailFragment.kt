@@ -89,13 +89,14 @@ class MoviesDetailFragment : BaseFragment(), MoviesDetailView {
 
                 override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
                     if (bitmap != null) {
-                        getImageColor(bitmap)
                         propertyImage.setImageBitmap(bitmap)
                     }
 
                 }
             })
-        } else if (!TextUtils.isEmpty(moviesItem?.backdropPath)) {
+        }
+
+        if (!TextUtils.isEmpty(moviesItem?.backdropPath)) {
             Picasso.get().load(BuildConfig.IMAGE_BASE.plus(moviesItem?.backdropPath)).into(object : Target {
                 override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
 
@@ -107,29 +108,16 @@ class MoviesDetailFragment : BaseFragment(), MoviesDetailView {
 
                 override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
                     if (bitmap != null) {
+                        /*if poster haven't images then set backup images path*/
+                        if (TextUtils.isEmpty(moviesItem?.posterPath)){
+                            propertyImage.setImageBitmap(bitmap)
+                        }
                         getImageColor(bitmap)
-                        propertyImage.setImageBitmap(bitmap)
+                        posterImage?.setImageBitmap(bitmap)
                     }
                 }
 
             })
-        }
-
-        if (!TextUtils.isEmpty(moviesItem?.backdropPath)) {
-            Picasso.get().load(BuildConfig.IMAGE_BASE.plus(moviesItem?.backdropPath)).into(posterImage, object : Callback {
-                override fun onSuccess() {
-                    Timber.d(Constants.ON_SUCCESS)
-                }
-
-                override fun onError(e: Exception?) {
-                    Timber.d("${Constants.ON_ERROR} $e")
-                }
-
-            })
-
-            if (moviesItem?.video!!) {
-                playIcon?.visibility = View.VISIBLE
-            }
         }
 
         moviesDescription?.text = moviesItem?.overview
