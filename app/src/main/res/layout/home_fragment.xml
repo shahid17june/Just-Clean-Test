@@ -10,11 +10,11 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_35sdp"
-        app:tabIndicatorColor="@color/colorAccent"
-        app:tabIndicatorHeight="@dimen/_2sdp"
+        app:tabIndicatorHeight="0dp"
         android:background="@color/colorPrimary"
-        app:tabSelectedTextColor="@color/black"
+        app:tabSelectedTextColor="@color/white"
         app:tabTextColor="@color/text_grey"
+        app:tabBackground="@drawable/tab_selector"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
 
